@@ -5,28 +5,28 @@ export type MaterialUnit = 'g' | 'ml'
 export type Material = {
   id: string
   name: string
+  brand: string
+  color: string
   technology: PrinterTechnology
-  price: number
-  quantity: number
   unit: MaterialUnit
 }
 
 export const defaultMaterials: Material[] = [
   {
     id: 'resin-abs-like',
-    name: 'Resina ABS-Like',
+    name: 'ABS-Like',
+    brand: 'Elegoo',
+    color: 'Cinza',
     technology: 'RESIN',
-    price: 120,
-    quantity: 1000,
     unit: 'ml',
   },
 
   {
     id: 'pla-generic',
     name: 'PLA',
+    brand: 'Genérico',
+    color: 'Preto',
     technology: 'FDM',
-    price: 90,
-    quantity: 1000,
     unit: 'g',
   },
 ]

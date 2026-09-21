@@ -8,6 +8,10 @@ import {
 } from './data/materials'
 
 import { useLocalStorage } from './hooks/useLocalStorage'
+import {
+  defaultMaterialPurchases,
+  type MaterialPurchase,
+} from './data/materialPurchases'
 import MaterialsPage from './pages/MaterialsPage'
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
@@ -21,9 +25,15 @@ function App() {
 
   const [materials, setMaterials] =
   useLocalStorage<Material[]>(
-    'printcost-materials',
+    'printcost-materials-v2',
     defaultMaterials,
   )
+
+  const [materialPurchases, setMaterialPurchases] =
+    useLocalStorage<MaterialPurchase[]>(
+      'printcost-material-purchases',
+      defaultMaterialPurchases,
+    )
 
   const [selectedPrinterId, setSelectedPrinterId] = useState(
     printers[0].id,
@@ -52,8 +62,22 @@ function App() {
       (material) => material.id === selectedMaterialId,
     ) ?? compatibleMaterials[0]
 
-  const materialUnitCost = selectedMaterial
-    ? selectedMaterial.price / selectedMaterial.quantity
+  const latestMaterialPurchase = selectedMaterial
+    ? materialPurchases
+        .filter(
+          (purchase) =>
+            purchase.materialId === selectedMaterial.id,
+        )
+        .sort(
+          (a, b) =>
+            new Date(b.purchasedAt).getTime() -
+            new Date(a.purchasedAt).getTime(),
+        )[0]
+    : undefined
+
+  const materialUnitCost = latestMaterialPurchase
+    ? latestMaterialPurchase.price /
+      latestMaterialPurchase.quantity
     : 0
 
   const materialCost =
@@ -353,6 +377,8 @@ function App() {
           <MaterialsPage
             materials={materials}
             setMaterials={setMaterials}
+            purchases={materialPurchases}
+            setPurchases={setMaterialPurchases}
           />
         )}
       </main>
