@@ -1,7 +1,10 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import './App.css'
 
-import { printers } from './data/printers'
+import {
+  defaultPrinters,
+  type Printer,
+} from './data/printers'
 import {
   defaultMaterials,
   type Material,
@@ -13,6 +16,7 @@ import {
   type MaterialPurchase,
 } from './data/materialPurchases'
 import MaterialsPage from './pages/MaterialsPage'
+import PrintersPage from './pages/PrintersPage'
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -21,7 +25,13 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 
 function App() {
   const [currentPage, setCurrentPage] =
-    useState<'calculator' | 'materials'>('calculator')
+    useState<'calculator' | 'printers' | 'materials'>('calculator')
+
+  const [printers, setPrinters] =
+    useLocalStorage<Printer[]>(
+      'printcost-printers',
+      defaultPrinters,
+    )
 
   const [materials, setMaterials] =
   useLocalStorage<Material[]>(
@@ -36,8 +46,23 @@ function App() {
     )
 
   const [selectedPrinterId, setSelectedPrinterId] = useState(
-    printers[0].id,
+    printers[0]?.id ?? '',
   )
+
+  useEffect(() => {
+    if (printers.length === 0) {
+      setSelectedPrinterId('')
+      return
+    }
+
+    const printerStillExists = printers.some(
+      (printer) => printer.id === selectedPrinterId,
+    )
+
+    if (!printerStillExists) {
+      setSelectedPrinterId(printers[0].id)
+    }
+  }, [printers, selectedPrinterId])
 
   const selectedPrinter =
     printers.find(
@@ -166,7 +191,10 @@ function App() {
             Calculadora
           </button>
 
-          <button disabled>
+          <button
+            className={currentPage === 'printers' ? 'active' : ''}
+            onClick={() => setCurrentPage('printers')}
+          >
             Impressoras
           </button>
 
@@ -400,6 +428,13 @@ function App() {
             </aside>
           </div>
         </section>
+        {currentPage === 'printers' && (
+          <PrintersPage
+            printers={printers}
+            setPrinters={setPrinters}
+          />
+        )}
+
         {currentPage === 'materials' && (
           <MaterialsPage
             materials={materials}

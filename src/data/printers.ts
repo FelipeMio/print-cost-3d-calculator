@@ -9,7 +9,7 @@ export type Printer = {
   failureRate: number
 }
 
-export const printers: Printer[] = [
+export const defaultPrinters: Printer[] = [
   {
     id: 'elegoo-saturn-2',
     name: 'Elegoo Saturn 2',
