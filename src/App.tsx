@@ -80,6 +80,14 @@ function App() {
       latestMaterialPurchase.quantity
     : 0
 
+  const normalizedMaterialPrice =
+    materialUnitCost * 1000
+
+  const normalizedMaterialUnit =
+    selectedMaterial?.unit === 'g'
+      ? 'kg'
+      : 'L'
+
   const materialCost =
     materialUsed * materialUnitCost
 
@@ -257,6 +265,25 @@ function App() {
                 </option>
               ))}
             </select>
+
+            {selectedMaterial && (
+              <div className="material-price-reference">
+                <span>Último preço registrado</span>
+
+                {latestMaterialPurchase ? (
+                  <strong>
+                    {currencyFormatter.format(
+                      normalizedMaterialPrice,
+                    )}{' '}
+                    / {normalizedMaterialUnit}
+                  </strong>
+                ) : (
+                  <strong>
+                    Nenhum preço registrado
+                  </strong>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="field">

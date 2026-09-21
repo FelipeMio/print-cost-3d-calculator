@@ -452,3 +452,26 @@
     grid-template-columns: 1fr;
   }
 }
+.material-price-reference {
+  margin-top: 9px;
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  border-radius: 8px;
+  background: #f7f9fc;
+
+  font-size: 12px;
+}
+
+.material-price-reference span {
+  color: #7c8798;
+}
+
+.material-price-reference strong {
+  color: #344258;
+  font-weight: 650;
+}
