@@ -128,14 +128,9 @@ function App() {
     printTimeHours *
     energyRate
 
-  const wearCost =
-    selectedPrinter.wearCostPerHour *
-    printTimeHours
-
   const printCost =
     materialCost +
-    energyCost +
-    wearCost
+    energyCost
 
   const failureReserve =
     printCost * (selectedPrinter.failureRate / 100)
@@ -380,11 +375,6 @@ function App() {
               <div className="summary-row">
                 <span>Energia</span>
                 <strong>{currencyFormatter.format(energyCost)}</strong>
-              </div>
-
-              <div className="summary-row">
-                <span>Desgaste da máquina</span>
-                <strong>{currencyFormatter.format(wearCost)}</strong>
               </div>
 
               <div className="summary-row">

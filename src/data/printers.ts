@@ -5,7 +5,6 @@ export type Printer = {
   name: string
   technology: PrinterTechnology
   powerWatts: number
-  wearCostPerHour: number
   failureRate: number
 }
 
@@ -15,7 +14,6 @@ export const defaultPrinters: Printer[] = [
     name: 'Elegoo Saturn 2',
     technology: 'RESIN',
     powerWatts: 80,
-    wearCostPerHour: 0.8,
     failureRate: 10,
   },
 
@@ -24,7 +22,6 @@ export const defaultPrinters: Printer[] = [
     name: 'Creality Ender 5 Pro',
     technology: 'FDM',
     powerWatts: 120,
-    wearCostPerHour: 0.6,
     failureRate: 7,
   },
 ]

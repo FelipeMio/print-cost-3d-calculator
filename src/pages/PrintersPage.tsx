@@ -17,24 +17,25 @@ function PrintersPage({
   setPrinters,
 }: PrintersPageProps) {
   const [name, setName] = useState('')
+
   const [technology, setTechnology] =
     useState<PrinterTechnology>('FDM')
 
-  const [powerWatts, setPowerWatts] = useState('')
-  const [wearCost, setWearCost] = useState('')
-  const [failureRate, setFailureRate] = useState('5')
+  const [powerWatts, setPowerWatts] =
+    useState('')
+
+  const [failureRate, setFailureRate] =
+    useState('5')
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const power = Number(powerWatts)
-    const wear = Number(wearCost)
     const failure = Number(failureRate)
 
     if (
       !name.trim() ||
       power <= 0 ||
-      wear < 0 ||
       failure < 0
     ) {
       return
@@ -45,7 +46,6 @@ function PrintersPage({
       name: name.trim(),
       technology,
       powerWatts: power,
-      wearCostPerHour: wear,
       failureRate: failure,
     }
 
@@ -56,7 +56,6 @@ function PrintersPage({
 
     setName('')
     setPowerWatts('')
-    setWearCost('')
     setFailureRate('5')
   }
 
@@ -65,6 +64,7 @@ function PrintersPage({
       window.alert(
         'Cadastre outra impressora antes de excluir esta.',
       )
+
       return
     }
 
@@ -92,7 +92,8 @@ function PrintersPage({
           <h1>Suas impressoras</h1>
 
           <span>
-            Cadastre as máquinas usadas nos seus orçamentos.
+            Cadastre as máquinas usadas nos seus
+            orçamentos.
           </span>
         </div>
       </div>
@@ -112,7 +113,9 @@ function PrintersPage({
                       : 'Resina'}
                   </span>
 
-                  <h2>{printer.name}</h2>
+                  <h2>
+                    {printer.name}
+                  </h2>
                 </div>
 
                 <button
@@ -127,22 +130,20 @@ function PrintersPage({
 
               <div className="printer-specs">
                 <div>
-                  <span>Potência média</span>
+                  <span>
+                    Potência média
+                  </span>
+
                   <strong>
                     {printer.powerWatts} W
                   </strong>
                 </div>
 
                 <div>
-                  <span>Desgaste</span>
-                  <strong>
-                    R$ {printer.wearCostPerHour.toFixed(2)}
-                    /h
-                  </strong>
-                </div>
+                  <span>
+                    Margem de segurança
+                  </span>
 
-                <div>
-                  <span>Reserva para falhas</span>
                   <strong>
                     {printer.failureRate}%
                   </strong>
@@ -156,7 +157,9 @@ function PrintersPage({
           className="printer-form"
           onSubmit={handleSubmit}
         >
-          <h2>Adicionar impressora</h2>
+          <h2>
+            Adicionar impressora
+          </h2>
 
           <div className="field">
             <label htmlFor="printerName">
@@ -211,7 +214,9 @@ function PrintersPage({
                 placeholder="120"
                 value={powerWatts}
                 onChange={(event) =>
-                  setPowerWatts(event.target.value)
+                  setPowerWatts(
+                    event.target.value,
+                  )
                 }
               />
 
@@ -220,26 +225,8 @@ function PrintersPage({
           </div>
 
           <div className="field">
-            <label htmlFor="printerWear">
-              Custo de desgaste por hora
-            </label>
-
-            <input
-              id="printerWear"
-              type="number"
-              min="0"
-              step="0.01"
-              placeholder="0.60"
-              value={wearCost}
-              onChange={(event) =>
-                setWearCost(event.target.value)
-              }
-            />
-          </div>
-
-          <div className="field">
             <label htmlFor="printerFailure">
-              Reserva para falhas
+              Margem de segurança
             </label>
 
             <div className="input-unit">
@@ -250,7 +237,9 @@ function PrintersPage({
                 step="0.1"
                 value={failureRate}
                 onChange={(event) =>
-                  setFailureRate(event.target.value)
+                  setFailureRate(
+                    event.target.value,
+                  )
                 }
               />
 
