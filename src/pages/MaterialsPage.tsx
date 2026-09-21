@@ -28,6 +28,8 @@ function MaterialsPage({
     useState(materials[0]?.id ?? '')
 
   const [addingMaterial, setAddingMaterial] = useState(false)
+  const [editingMaterialId, setEditingMaterialId] =
+    useState<string | null>(null)
 
   const [name, setName] = useState('')
   const [brand, setBrand] = useState('')
@@ -87,25 +89,61 @@ function MaterialsPage({
         ? 'g'
         : 'ml'
 
-    const newMaterial: Material = {
-      id: crypto.randomUUID(),
-      name: name.trim(),
-      brand: brand.trim(),
-      color: color.trim(),
-      technology,
-      unit,
+    if (editingMaterialId) {
+      setMaterials(
+        materials.map((material) =>
+          material.id === editingMaterialId
+            ? {
+                ...material,
+                name: name.trim(),
+                brand: brand.trim(),
+                color: color.trim(),
+                technology,
+                unit,
+              }
+            : material,
+        ),
+      )
+    } else {
+      const newMaterial: Material = {
+        id: crypto.randomUUID(),
+        name: name.trim(),
+        brand: brand.trim(),
+        color: color.trim(),
+        technology,
+        unit,
+      }
+
+      setMaterials([
+        ...materials,
+        newMaterial,
+      ])
+
+      setSelectedMaterialId(newMaterial.id)
     }
-
-    setMaterials([
-      ...materials,
-      newMaterial,
-    ])
-
-    setSelectedMaterialId(newMaterial.id)
 
     setName('')
     setBrand('')
     setColor('')
+    setEditingMaterialId(null)
+    setAddingMaterial(false)
+  }
+
+  function startEditingMaterial(material: Material) {
+    setName(material.name)
+    setBrand(material.brand)
+    setColor(material.color)
+    setTechnology(material.technology)
+
+    setEditingMaterialId(material.id)
+    setAddingMaterial(true)
+  }
+
+  function cancelMaterialForm() {
+    setName('')
+    setBrand('')
+    setColor('')
+    setEditingMaterialId(null)
     setAddingMaterial(false)
   }
 
@@ -195,9 +233,13 @@ function MaterialsPage({
         <button
           className="new-material-button"
           type="button"
-          onClick={() =>
+          onClick={() => {
+            setEditingMaterialId(null)
+            setName('')
+            setBrand('')
+            setColor('')
             setAddingMaterial(true)
-          }
+          }}
         >
           + Novo material
         </button>
@@ -279,9 +321,16 @@ function MaterialsPage({
             >
               <div className="panel-heading">
                 <div>
-                  <span>Novo material</span>
+                  <span>
+                    {editingMaterialId
+                      ? 'Editar material'
+                      : 'Novo material'}
+                  </span>
+
                   <h2>
-                    Cadastrar material
+                    {editingMaterialId
+                      ? 'Editar material'
+                      : 'Cadastrar material'}
                   </h2>
                 </div>
               </div>
@@ -362,9 +411,7 @@ function MaterialsPage({
                 <button
                   type="button"
                   className="secondary-button"
-                  onClick={() =>
-                    setAddingMaterial(false)
-                  }
+                  onClick={cancelMaterialForm}
                 >
                   Cancelar
                 </button>
@@ -373,7 +420,9 @@ function MaterialsPage({
                   type="submit"
                   className="primary-button"
                 >
-                  Salvar material
+                  {editingMaterialId
+                    ? 'Salvar alterações'
+                    : 'Salvar material'}
                 </button>
               </div>
             </form>
@@ -402,17 +451,31 @@ function MaterialsPage({
                     </p>
                   </div>
 
-                  <button
-                    className="danger-button"
-                    type="button"
-                    onClick={() =>
-                      removeMaterial(
-                        selectedMaterial.id,
-                      )
-                    }
-                  >
-                    Excluir
-                  </button>
+                  <div className="material-actions">
+                    <button
+                      className="secondary-button"
+                      type="button"
+                      onClick={() =>
+                        startEditingMaterial(
+                          selectedMaterial,
+                        )
+                      }
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      className="danger-button"
+                      type="button"
+                      onClick={() =>
+                        removeMaterial(
+                          selectedMaterial.id,
+                        )
+                      }
+                    >
+                      Excluir
+                    </button>
+                  </div>
                 </div>
 
                 {latestPurchase ? (
