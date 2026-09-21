@@ -1,0 +1,454 @@
+.app {
+  min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  height: 72px;
+  padding: 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+  border-bottom: 1px solid #e7ebf0;
+}
+
+.header strong {
+  font-size: 21px;
+  color: #0f2747;
+}
+
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header nav a {
+  color: #647083;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+
+.header nav a:hover {
+  color: #1668e3;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+.page {
+  padding: 48px 32px 80px;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.page-heading {
+  margin-bottom: 32px;
+}
+
+.page-heading > p:first-child {
+  margin: 0 0 8px;
+
+  color: #1668e3;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-heading h1 {
+  margin: 0;
+
+  max-width: 700px;
+
+  color: #172033;
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.page-heading h1 + p {
+  max-width: 620px;
+  margin: 12px 0 0;
+
+  color: #697386;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   LAYOUT PRINCIPAL
+========================= */
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+.configuration {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card,
+.summary {
+  background: #ffffff;
+  border: 1px solid #e5e9ef;
+  border-radius: 16px;
+}
+
+.card {
+  padding: 28px;
+}
+
+.card h2 {
+  margin: 0 0 24px;
+
+  color: #172033;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-area {
+  min-height: 210px;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px dashed #ccd5e1;
+  border-radius: 14px;
+
+  background: #fafbfd;
+
+  text-align: center;
+
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #1668e3;
+  background: #f6f9ff;
+}
+
+.upload-area p {
+  margin: 0;
+
+  color: #273449;
+  font-weight: 600;
+}
+
+.upload-area span {
+  margin-top: 6px;
+
+  color: #8a94a5;
+  font-size: 13px;
+}
+
+.upload-area button {
+  margin-top: 22px;
+  padding: 10px 18px;
+
+  border: 1px solid #d6dde7;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #273449;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.upload-area button:hover {
+  border-color: #1668e3;
+  color: #1668e3;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #39465a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d5dce5;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #202c3d;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #1668e3;
+
+  box-shadow: 0 0 0 3px rgba(22, 104, 227, 0.1);
+}
+
+
+/* =========================
+   INPUT COM UNIDADE
+========================= */
+
+.input-unit {
+  position: relative;
+}
+
+.input-unit input {
+  padding-right: 52px;
+}
+
+.input-unit span {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+
+  transform: translateY(-50%);
+
+  color: #8590a2;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   TEMPO
+========================= */
+
+.time-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+
+/* =========================
+   RESUMO
+========================= */
+
+.summary {
+  position: sticky;
+  top: 24px;
+
+  padding: 26px;
+}
+
+.summary > p:first-child {
+  margin: 0 0 24px;
+
+  color: #172033;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 14px;
+
+  color: #697386;
+  font-size: 13px;
+}
+
+.summary-row strong {
+  color: #273449;
+  font-weight: 600;
+}
+
+.summary hr {
+  margin: 20px 0;
+
+  border: 0;
+  border-top: 1px solid #e5e9ef;
+}
+
+
+/* =========================
+   PREÇO PRINCIPAL
+========================= */
+
+.price {
+  margin-top: 24px;
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  border-radius: 12px;
+
+  background: #f2f7ff;
+}
+
+.price span {
+  color: #58708f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.price strong {
+  color: #105fc4;
+  font-size: 32px;
+  letter-spacing: -0.04em;
+}
+
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
+
+.summary > button {
+  width: 100%;
+  height: 48px;
+
+  margin-top: 20px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #1668e3;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.summary > button:hover {
+  background: #0e59c5;
+}
+
+.summary > button:active {
+  transform: translateY(1px);
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .header nav {
+    gap: 18px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    height: auto;
+    padding: 18px 20px;
+
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .header nav {
+    width: 100%;
+    gap: 16px;
+
+    overflow-x: auto;
+  }
+
+  .page {
+    padding: 32px 16px 64px;
+  }
+
+  .page-heading h1 {
+    font-size: 29px;
+  }
+
+  .card,
+  .summary {
+    padding: 20px;
+  }
+
+  .time-inputs {
+    grid-template-columns: 1fr;
+  }
+}
