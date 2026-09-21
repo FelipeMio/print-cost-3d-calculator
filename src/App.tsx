@@ -2,7 +2,13 @@ import { useState, type ChangeEvent } from 'react'
 import './App.css'
 
 import { printers } from './data/printers'
-import { materials } from './data/materials'
+import {
+  defaultMaterials,
+  type Material,
+} from './data/materials'
+
+import { useLocalStorage } from './hooks/useLocalStorage'
+import MaterialsPage from './pages/MaterialsPage'
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -10,6 +16,15 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 })
 
 function App() {
+  const [currentPage, setCurrentPage] =
+    useState<'calculator' | 'materials'>('calculator')
+
+  const [materials, setMaterials] =
+  useLocalStorage<Material[]>(
+    'printcost-materials',
+    defaultMaterials,
+  )
+
   const [selectedPrinterId, setSelectedPrinterId] = useState(
     printers[0].id,
   )
@@ -112,15 +127,40 @@ function App() {
         </div>
 
         <nav>
-          <a href="#">Calculadora</a>
-          <a href="#">Impressoras</a>
-          <a href="#">Materiais</a>
-          <a href="#">Projetos</a>
+          <button
+            className={currentPage === 'calculator' ? 'active' : ''}
+            onClick={() => setCurrentPage('calculator')}
+          >
+            Calculadora
+          </button>
+
+          <button disabled>
+            Impressoras
+          </button>
+
+          <button
+            className={currentPage === 'materials' ? 'active' : ''}
+            onClick={() => setCurrentPage('materials')}
+          >
+            Materiais
+          </button>
+
+          <button disabled>
+            Projetos
+          </button>
         </nav>
       </header>
 
       <main className="page">
-        <section className="calculator">
+        <section
+          className="calculator"
+          style={{
+            display:
+              currentPage === 'calculator'
+                ? undefined
+                : 'none',
+          }}
+        >
           <div className="page-heading">
             <p>Novo orçamento</p>
 
@@ -309,6 +349,12 @@ function App() {
             </aside>
           </div>
         </section>
+        {currentPage === 'materials' && (
+          <MaterialsPage
+            materials={materials}
+            setMaterials={setMaterials}
+          />
+        )}
       </main>
     </div>
   )

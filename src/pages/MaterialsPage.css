@@ -1,0 +1,149 @@
+.materials-page {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.materials-heading {
+  margin-bottom: 32px;
+}
+
+.materials-heading p {
+  margin: 0 0 8px;
+  color: #1668e3;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.materials-heading h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 36px;
+  letter-spacing: -0.03em;
+}
+
+.materials-heading span {
+  display: block;
+  margin-top: 10px;
+  color: #697386;
+}
+
+.materials-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+.materials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.material-card,
+.material-form {
+  padding: 24px;
+  background: white;
+  border: 1px solid #e5e9ef;
+  border-radius: 16px;
+}
+
+.material-card h2 {
+  margin: 6px 0 20px;
+  font-size: 18px;
+  color: #172033;
+}
+
+.material-type {
+  color: #1668e3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.material-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.material-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.material-info span {
+  color: #8792a3;
+  font-size: 12px;
+}
+
+.material-info strong {
+  color: #273449;
+  font-size: 14px;
+}
+
+.delete-material {
+  margin-top: 22px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid #e0e5eb;
+  border-radius: 8px;
+  color: #bf3535;
+}
+
+.material-form {
+  position: sticky;
+  top: 24px;
+}
+
+.material-form h2 {
+  margin: 0 0 24px;
+  color: #172033;
+  font-size: 18px;
+}
+
+.price-input {
+  position: relative;
+}
+
+.price-input span {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8590a2;
+  font-size: 13px;
+}
+
+.price-input input {
+  padding-left: 40px;
+}
+
+.add-material-button {
+  width: 100%;
+  height: 46px;
+  border: 0;
+  border-radius: 9px;
+  background: #1668e3;
+  color: white;
+  font-weight: 650;
+}
+
+@media (max-width: 850px) {
+  .materials-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .material-form {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .material-info {
+    grid-template-columns: 1fr;
+  }
+}

@@ -11,7 +11,7 @@ export type Material = {
   unit: MaterialUnit
 }
 
-export const materials: Material[] = [
+export const defaultMaterials: Material[] = [
   {
     id: 'resin-abs-like',
     name: 'Resina ABS-Like',
