@@ -24,6 +24,12 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 })
 
 function App() {
+  const [lossReserveRate] =
+    useLocalStorage<number>(
+      'printcost-loss-reserve-rate',
+      5,
+    )
+
   const [currentPage, setCurrentPage] =
     useState<'calculator' | 'printers' | 'materials'>('calculator')
 
@@ -133,7 +139,7 @@ function App() {
     energyCost
 
   const failureReserve =
-    printCost * (selectedPrinter.failureRate / 100)
+    printCost * (lossReserveRate / 100)
 
   const productionCost =
     printCost + failureReserve
@@ -378,7 +384,7 @@ function App() {
               </div>
 
               <div className="summary-row">
-                <span>Reserva para falhas</span>
+                <span>Reserva para perdas</span>
                 <strong>
                   {currencyFormatter.format(failureReserve)}
                 </strong>

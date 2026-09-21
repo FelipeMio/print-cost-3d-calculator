@@ -24,19 +24,14 @@ function PrintersPage({
   const [powerWatts, setPowerWatts] =
     useState('')
 
-  const [failureRate, setFailureRate] =
-    useState('5')
-
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const power = Number(powerWatts)
-    const failure = Number(failureRate)
 
     if (
       !name.trim() ||
-      power <= 0 ||
-      failure < 0
+      power <= 0
     ) {
       return
     }
@@ -46,7 +41,6 @@ function PrintersPage({
       name: name.trim(),
       technology,
       powerWatts: power,
-      failureRate: failure,
     }
 
     setPrinters([
@@ -56,7 +50,6 @@ function PrintersPage({
 
     setName('')
     setPowerWatts('')
-    setFailureRate('5')
   }
 
   function removePrinter(id: string) {
@@ -138,16 +131,6 @@ function PrintersPage({
                     {printer.powerWatts} W
                   </strong>
                 </div>
-
-                <div>
-                  <span>
-                    Margem de segurança
-                  </span>
-
-                  <strong>
-                    {printer.failureRate}%
-                  </strong>
-                </div>
               </div>
             </article>
           ))}
@@ -223,30 +206,6 @@ function PrintersPage({
               <span>W</span>
             </div>
           </div>
-
-          <div className="field">
-            <label htmlFor="printerFailure">
-              Margem de segurança
-            </label>
-
-            <div className="input-unit">
-              <input
-                id="printerFailure"
-                type="number"
-                min="0"
-                step="0.1"
-                value={failureRate}
-                onChange={(event) =>
-                  setFailureRate(
-                    event.target.value,
-                  )
-                }
-              />
-
-              <span>%</span>
-            </div>
-          </div>
-
           <button
             className="add-printer-button"
             type="submit"
